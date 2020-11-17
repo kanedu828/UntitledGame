@@ -1,9 +1,9 @@
-from unit import Unit, Faction, AttackType
+from util.unit import Unit, Faction, AttackType
 import random
 
-class TempleGuard(Unit):
+class Tor(Unit):
 
-    NAME = 'Temple Guard'
+    NAME = 'Tor'
 
     FACTIONS = [Faction.NOBLE]
 
@@ -23,6 +23,7 @@ class TempleGuard(Unit):
 
     def __init__(self):
         super().__init__(self.NAME, self.FACTIONS, self.ATTACK_TYPE, self.BASE_STATS)
+        self.ability_description = 'Tor attacks and gains 2 armour.'
 
     def passive(self, friendly_team, opposing_team, target):
         return
@@ -35,8 +36,8 @@ class TempleGuard(Unit):
         self.set_stats(new_stats)
         return game_log
 
-    def level_growth(self, stats):
+    def level_growth(self, levels):
         pass
 
-    def star_growth(self, stats):
+    def star_growth(self, stars):
         pass

@@ -1,4 +1,4 @@
-from unit import Unit, Faction, AttackType
+from util.unit import Unit, Faction, AttackType
 
 class King(Unit):
 
@@ -22,6 +22,7 @@ class King(Unit):
 
     def __init__(self):
         super().__init__(self.NAME, self.FACTIONS, self.ATTACK_TYPE, self.BASE_STATS)
+        self.ability_description = 'King grants his entire team 5 armor.'
 
     def passive(self, friendly_team, opposing_team, target):
         return
@@ -34,8 +35,8 @@ class King(Unit):
                 unit.set_stats(new_stats)
         return f"{friendly_team['name']}\'s {self.name} buffed his entire team by 5 armor."
 
-    def level_growth(self, stats):
+    def level_growth(self, levels):
         pass
 
-    def star_growth(self, stats):
+    def star_growth(self, stars):
         pass

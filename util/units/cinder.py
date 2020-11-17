@@ -1,4 +1,4 @@
-from unit import Unit, Faction, AttackType, Status
+from util.unit import Unit, Faction, AttackType, Status
 
 class Cinder(Unit):
 
@@ -14,7 +14,7 @@ class Cinder(Unit):
         'magic': 0,
         'armor': 7,
         'resistance': 7,
-        'speed': 10,
+        'speed': 6,
         'crit_chance': 0,
         'cooldown': 2,
         'dodge': 0
@@ -22,6 +22,7 @@ class Cinder(Unit):
 
     def __init__(self):
         super().__init__(self.NAME, self.FACTIONS, self.ATTACK_TYPE, self.BASE_STATS)
+        self.ability_description = 'Backline units gain +3 attack/speed'
 
     def passive(self, friendly_team, opposing_team, target):
         return
@@ -41,8 +42,8 @@ class Cinder(Unit):
         return game_log
 
 
-    def level_growth(self, stats):
+    def level_growth(self, levels):
         pass
 
-    def star_growth(self, stats):
+    def star_growth(self, stars):
         pass

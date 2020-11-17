@@ -125,8 +125,11 @@ class Unit(ABC):
         self.current_hp = stats['hp']
         self.ability_charge = 0
         self.status = Status.NONE
+        self.passive_description = 'No passive'
+        self.ability_description = 'No ability'
 
     def get_target(self, unit_position, friendly_team, opposing_team) -> int:
+        target_position = -1
         if self.attack_type == AttackType.CLOSE:
             if ((unit_position == 2 or unit_position == 3)
                 and ((not opposing_team['team'][0] == None and friendly_team['team'][0].current_hp > 0) or (not opposing_team['team'][1] == None and friendly_team['team'][1].current_hp > 0))):
@@ -162,8 +165,6 @@ class Unit(ABC):
         else:
             opposing_team['team'][target].current_hp -= damage
             game_log += f"{friendly_team['name']}\'s {self.name} dealt {damage} damage to {opposing_team['name']}\'s {opposing_team['team'][target].name}"
-        if opposing_team['team'][target].current_hp <= 0:
-            game_log += f"\n{opposing_team['name']}\'s {opposing_team['team'][target].name} has been defeated."
         return game_log
 
     def action(self, friendly_team, opposing_team):
@@ -269,14 +270,14 @@ class Unit(ABC):
         pass
 
     @abstractmethod
-    def level_growth(self, stats):
+    def level_growth(self, levels):
         """
             A unit's stat growth based on their level.
         """
         pass
 
     @abstractmethod
-    def star_growth(self, stats):
+    def star_growth(self, stars):
         """
             A unit's stat growth based on their stars.
         """

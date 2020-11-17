@@ -1,4 +1,4 @@
-from unit import Unit, Faction, AttackType, Status
+from util.unit import Unit, Faction, AttackType, Status
 
 class Rajon(Unit):
 
@@ -22,6 +22,7 @@ class Rajon(Unit):
 
     def __init__(self):
         super().__init__(self.NAME, self.FACTIONS, self.ATTACK_TYPE, self.BASE_STATS)
+        self.ability_description = 'Rajon attacks and stuns the target.'
 
     def passive(self, friendly_team, opposing_team, target):
         return
@@ -32,8 +33,8 @@ class Rajon(Unit):
         opposing_team['team'][target].status = Status.STUNNED
         return game_log
 
-    def level_growth(self, stats):
+    def level_growth(self, levels):
         pass
 
-    def star_growth(self, stats):
+    def star_growth(self, stars):
         pass

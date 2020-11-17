@@ -1,4 +1,4 @@
-from unit import Unit, Faction, AttackType
+from util.unit import Unit, Faction, AttackType
 
 class Forsn(Unit):
 
@@ -22,6 +22,7 @@ class Forsn(Unit):
 
     def __init__(self):
         super().__init__(self.NAME, self.FACTIONS, self.ATTACK_TYPE, self.BASE_STATS)
+        self.ability_description = 'Forsn gains +1 attack for the rest of combat.'
 
     def passive(self, friendly_team, opposing_team, target):
         return
@@ -34,8 +35,8 @@ class Forsn(Unit):
         game_log += self.attack(friendly_team, opposing_team, target)
         return game_log
 
-    def level_growth(self, stats):
+    def level_growth(self, levels):
         pass
 
-    def star_growth(self, stats):
+    def star_growth(self, stars):
         pass

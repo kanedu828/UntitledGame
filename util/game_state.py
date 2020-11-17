@@ -1,4 +1,4 @@
-from unit import Faction
+from util.unit import Faction
 
 class GameState():
     """

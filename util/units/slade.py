@@ -1,8 +1,8 @@
-from unit import Unit, Faction, AttackType
+from util.unit import Unit, Faction, AttackType
 
-class Executioner(Unit):
+class Slade(Unit):
 
-    NAME = 'Executioner'
+    NAME = 'Slade'
 
     FACTIONS = [Faction.INFERNAL]
 
@@ -22,6 +22,7 @@ class Executioner(Unit):
 
     def __init__(self):
         super().__init__(self.NAME, self.FACTIONS, self.ATTACK_TYPE, self.BASE_STATS)
+        self.ability_description = 'If the target has less health than Slade\'s health, then he executes the target.'
 
     def passive(self, friendly_team, opposing_team, target):
         return
@@ -35,8 +36,8 @@ class Executioner(Unit):
             game_log += self.attack(friendly_team, opposing_team, target)
         return game_log
 
-    def level_growth(self, stats):
+    def level_growth(self, levels):
         pass
 
-    def star_growth(self, stats):
+    def star_growth(self, stars):
         pass

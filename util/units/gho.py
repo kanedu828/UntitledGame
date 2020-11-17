@@ -1,8 +1,8 @@
-from unit import Unit, Faction, AttackType
+from util.unit import Unit, Faction, AttackType
 
-class GhostMage(Unit):
+class Gho(Unit):
 
-    NAME = 'Ghost Mage'
+    NAME = 'Gho'
 
     FACTIONS = [Faction.PHANTOM]
 
@@ -22,6 +22,8 @@ class GhostMage(Unit):
 
     def __init__(self):
         super().__init__(self.NAME, self.FACTIONS, self.ATTACK_TYPE, self.BASE_STATS)
+        self.passive_description = 'Gho\'s target loses 1 resistance.'
+        self.ability_description = 'Gho does 2 bonus magic damage.'
 
     def passive(self, friendly_team, opposing_team, target):
         new_stats = opposing_team['team'][target].stats.copy()
@@ -35,8 +37,8 @@ class GhostMage(Unit):
         self.passive(friendly_team, opposing_team, target)
         return game_log
 
-    def level_growth(self, stats):
+    def level_growth(self, levels):
         pass
 
-    def star_growth(self, stats):
+    def star_growth(self, stars):
         pass

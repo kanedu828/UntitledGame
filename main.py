@@ -15,7 +15,7 @@ else:
 client.remove_command('help')
 
 extensions = [
-
+    'cogs.shop'
 ]
 
 def check_if_me(ctx):

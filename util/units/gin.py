@@ -1,4 +1,4 @@
-from unit import Unit, Faction, AttackType
+from util.unit import Unit, Faction, AttackType
 import random
 
 class Gin(Unit):
@@ -23,16 +23,22 @@ class Gin(Unit):
 
     def __init__(self):
         super().__init__(self.NAME, self.FACTIONS, self.ATTACK_TYPE, self.BASE_STATS)
+        self.passive_description = 'Gin loads his gun and cannot attack.'
+        self.ability_description = 'Gin fires a shot.'
 
     def action(self, friendly_team, opposing_team):
+        game_log = ''
+        unit_position = friendly_team['team'].index(self)
+        target_position = self.get_target(unit_position, friendly_team, opposing_team)
         if self.ability_charge >= self.stats['cooldown']:
-            unit_position = friendly_team['team'].index(self)
-            target_position = self.get_target(unit_position, friendly_team, opposing_team)
             self.ability_charge = 0
-            return self.ability(friendly_team, opposing_team, target_position)
+            game_log += self.ability(friendly_team, opposing_team, target_position)
         else:
             self.ability_charge += 1
-            return f"{friendly_team['name']}\'s Gin is loading his gun."
+            game_log += f"{friendly_team['name']}\'s Gin is loading his gun."
+        if opposing_team['team'][target_position].current_hp <= 0:
+            game_log += f"\n{opposing_team['name']}\'s {opposing_team['team'][target_position].name} has been defeated."
+        return game_log
 
     def passive(self, friendly_team, opposing_team, target):
         return
@@ -43,8 +49,8 @@ class Gin(Unit):
         target_position = self.get_target(unit_position, friendly_team, opposing_team)
         return self.attack(friendly_team, opposing_team, target_position)
 
-    def level_growth(self, stats):
+    def level_growth(self, levels):
         pass
 
-    def star_growth(self, stats):
+    def star_growth(self, stars):
         pass
